@@ -1,0 +1,56 @@
+version: 1.0.{build}
+build:
+  project: YellowDrawer.Storage.sln
+  publish_nuget: true
+  publish_nuget_symbols: true
+  include_nuget_references: true
+  verbosity: minimal
+  
+after_build:
+- nuget pack YellowDrawer.Storage.Azure.nuspec  -Version "%APPVEYOR_BUILD_VERSION%"
+- nuget pack YellowDrawer.Storage.Amazon.nuspec  -Version "%APPVEYOR_BUILD_VERSION%"
+- nuget pack YellowDrawer.Storage.GridFS.nuspec  -Version "%APPVEYOR_BUILD_VERSION%"
+- nuget pack YellowDrawer.Storage.Common.nuspec  -Version "%APPVEYOR_BUILD_VERSION%"
+
+artifacts:
+- path: 'YellowDrawer.Storage.Azure.nupkg'
+  name: YellowDrawer.Storage.Azure
+- path: 'YellowDrawer.Storage.Amazon.nupkg'
+  name: YellowDrawer.Storage.Amazon
+- path: 'YellowDrawer.Storage.GridFS.nupkg'
+  name: YellowDrawer.Storage.GridFS
+- path: 'YellowDrawer.Storage.Common.nupkg'
+  name: YellowDrawer.Storage.Common
+  
+install:
+  - nuget restore YellowDrawer.Storage.sln
+
+deploy:
+  provider: NuGet
+  api_key: 93ff9aec-bed4-4af0-a28f-161f8bbdda12
+  artifact: YellowDrawer.Storage.Azure
+  on:
+    branch: master
+	
+deploy:
+  provider: NuGet
+  api_key: 93ff9aec-bed4-4af0-a28f-161f8bbdda12
+  artifact: YellowDrawer.Storage.Amazon
+  on:
+    branch: master
+	
+deploy:
+  provider: NuGet
+  api_key: 93ff9aec-bed4-4af0-a28f-161f8bbdda12
+  artifact: YellowDrawer.Storage.GridFS
+  on:
+    branch: master
+	
+deploy:
+  provider: NuGet
+  api_key: 93ff9aec-bed4-4af0-a28f-161f8bbdda12
+  artifact: YellowDrawer.Storage.Common
+  on:
+    branch: master
+  
+  
