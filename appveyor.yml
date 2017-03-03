@@ -27,15 +27,15 @@ install:
 
 deploy:
 - provider: NuGet
-  api_key: 93ff9aec-bed4-4af0-a28f-161f8bbdda12
+  api_key: cba3accb-5b4a-4ca3-9f58-d2143d9cf05d
   artifact: YellowDrawer.Storage.Azure  
 - provider: NuGet
-  api_key: 93ff9aec-bed4-4af0-a28f-161f8bbdda12
+  api_key: cba3accb-5b4a-4ca3-9f58-d2143d9cf05d
   artifact: YellowDrawer.Storage.Amazon
 - provider: NuGet
-  api_key: 93ff9aec-bed4-4af0-a28f-161f8bbdda12
+  api_key: cba3accb-5b4a-4ca3-9f58-d2143d9cf05d
   artifact: YellowDrawer.Storage.GridFS  
 - provider: NuGet
-  api_key: 93ff9aec-bed4-4af0-a28f-161f8bbdda12
+  api_key: cba3accb-5b4a-4ca3-9f58-d2143d9cf05d
   artifact: YellowDrawer.Storage.Common
   
