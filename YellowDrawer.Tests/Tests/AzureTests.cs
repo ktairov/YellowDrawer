@@ -11,17 +11,17 @@ namespace YellowDrawer.Storage.Tests.Tests
         public static string connectionStringAzure = "DefaultEndpointsProtocol=https;AccountName={AccountName};AccountKey={AccountKey}";
         private IStorageProvider azureProvider;
 
-        [TestInitialize]
-        public void Initialize()
-        {
-            var cloudStorageAccount = CloudStorageAccount.Parse(connectionStringAzure);
-            azureProvider = new AzureBlobStorageProvider(cloudStorageAccount);
-        }
+        //[TestInitialize]
+        //public void Initialize()
+        //{
+        //    var cloudStorageAccount = CloudStorageAccount.Parse(connectionStringAzure);
+        //    azureProvider = new AzureBlobStorageProvider(cloudStorageAccount);
+        //}
 
-        [TestMethod]
-        public void SuccessCreateFile()
-        {
-            CommonTests.SuccessCreateFile(azureProvider);
-        }
+        //[TestMethod]
+        //public void SuccessCreateFile()
+        //{
+        //    CommonTests.SuccessCreateFile(azureProvider);
+        //}
     }
 }
