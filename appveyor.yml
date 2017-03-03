@@ -7,19 +7,19 @@ build:
   verbosity: minimal
   
 after_build:
-- nuget pack YellowDrawer.Storage.Azure.nuspec  -Version "%APPVEYOR_BUILD_VERSION%"
-- nuget pack YellowDrawer.Storage.Amazon.nuspec  -Version "%APPVEYOR_BUILD_VERSION%"
-- nuget pack YellowDrawer.Storage.GridFS.nuspec  -Version "%APPVEYOR_BUILD_VERSION%"
-- nuget pack YellowDrawer.Storage.Common.nuspec  -Version "%APPVEYOR_BUILD_VERSION%"
+- nuget pack YellowDrawer.Storage.Azure\YellowDrawer.Storage.Azure.nuspec  -Version "%APPVEYOR_BUILD_VERSION%"
+- nuget pack YellowDrawer.Storage.Amazon\YellowDrawer.Storage.Amazon.nuspec  -Version "%APPVEYOR_BUILD_VERSION%"
+- nuget pack YellowDrawer.Storage.GridFS\YellowDrawer.Storage.GridFS.nuspec  -Version "%APPVEYOR_BUILD_VERSION%"
+- nuget pack YellowDrawer.Storage.Common\YellowDrawer.Storage.Common.nuspec  -Version "%APPVEYOR_BUILD_VERSION%"
 
 artifacts:
-- path: 'YellowDrawer.Storage.Azure.nupkg'
+- path: 'YellowDrawer.Storage.Azure\YellowDrawer.Storage.Azure.nupkg'
   name: YellowDrawer.Storage.Azure
-- path: 'YellowDrawer.Storage.Amazon.nupkg'
+- path: 'YellowDrawer.Storage.Amazon\YellowDrawer.Storage.Amazon.nupkg'
   name: YellowDrawer.Storage.Amazon
-- path: 'YellowDrawer.Storage.GridFS.nupkg'
+- path: 'YellowDrawer.Storage.GridFS\YellowDrawer.Storage.GridFS.nupkg'
   name: YellowDrawer.Storage.GridFS
-- path: 'YellowDrawer.Storage.Common.nupkg'
+- path: 'YellowDrawer.Storage.Common\YellowDrawer.Storage.Common.nupkg'
   name: YellowDrawer.Storage.Common
   
 install:
