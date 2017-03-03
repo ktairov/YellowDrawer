@@ -11,6 +11,7 @@
     <copyright>Copyright 2017</copyright>
 	<dependencies>
 			<dependency id="YellowDrawer.Storage.Common" />
+			<dependency id="WindowsAzure.Storage.Contrib" />
 	</dependencies>
   </metadata>
 	<files>
