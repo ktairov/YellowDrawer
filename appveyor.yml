@@ -31,21 +31,22 @@ deploy:
     artifact: YellowDrawer.Storage.Azure
     on:
        branch: master
--provider: NuGet
-  api_key: 93ff9aec-bed4-4af0-a28f-161f8bbdda12
-  artifact: YellowDrawer.Storage.Amazon
-  on:
-    branch: master
-  -provider: NuGet
-  api_key: 93ff9aec-bed4-4af0-a28f-161f8bbdda12
-  artifact: YellowDrawer.Storage.GridFS
-  on:
-    branch: master
+  - provider: NuGet
+    api_key: 93ff9aec-bed4-4af0-a28f-161f8bbdda12
+    artifact: YellowDrawer.Storage.Amazon
+    on:
+      branch: master
 	
--provider: NuGet
-  api_key: 93ff9aec-bed4-4af0-a28f-161f8bbdda12
-  artifact: YellowDrawer.Storage.Common
-  on:
-    branch: master
+  - provider: NuGet
+    api_key: 93ff9aec-bed4-4af0-a28f-161f8bbdda12
+    artifact: YellowDrawer.Storage.GridFS
+    on:
+      branch: master
+	
+  - provider: NuGet
+    api_key: 93ff9aec-bed4-4af0-a28f-161f8bbdda12
+    artifact: YellowDrawer.Storage.Common
+    on:
+      branch: master
   
   
