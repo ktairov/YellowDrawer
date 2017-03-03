@@ -13,6 +13,7 @@
             <group targetFramework=".NETFramework4.5" />
             <group targetFramework=".NETFramework4.0" />
             <group targetFramework=".NETFramework3.5" />
+			<dependency id="YellowDrawer.Storage.Common" />
 	</dependencies>
   </metadata>
 	<files>
