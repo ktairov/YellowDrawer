@@ -72,9 +72,8 @@ namespace YellowDrawer.Storage.AmazonS3
                     throw new InvalidOperationException(string.Format("The folder could not be created at path: {0}. {1}", path, ex));
                 }
             }
-
             return new S3DirectoryInfo(_amazonS3, _bucketName, path)
-                .GetDirectories("*.*", SearchOption.AllDirectories)
+                .GetDirectories("*", SearchOption.AllDirectories)
                 .Select<S3DirectoryInfo, IStorageFolder>(di => new AmazonStorageFolder(Path.Combine(Fix(path), di.Name), di))
                 .ToList();
         }

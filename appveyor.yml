@@ -12,6 +12,11 @@ after_build:
 - nuget pack YellowDrawer.Storage.GridFS\YellowDrawer.Storage.GridFS.nuspec  -Version "%APPVEYOR_BUILD_VERSION%" -OutputDirectory YellowDrawer.Storage.GridFS
 - nuget pack YellowDrawer.Storage.Common\YellowDrawer.Storage.Common.nuspec  -Version "%APPVEYOR_BUILD_VERSION%" -OutputDirectory YellowDrawer.Storage.Common
 
+test:
+  categories:
+    except:
+      - Unit
+
 artifacts:
 - path: 'YellowDrawer.Storage.Azure\*.nupkg'
   name: YellowDrawer.Storage.Azure

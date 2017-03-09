@@ -43,6 +43,7 @@ namespace YellowDrawer.Storage.GridFS
         public void DeleteFolder(string path)
         {
             var files = _bucket.Find(Builders<GridFSFileInfo>.Filter.Empty).ToList();
+            path = path.TrimEnd('\\') + '\\';
             var fileResult = files.FirstOrDefault(x => x.Filename == path);
             if (fileResult != null)
                 _bucket.Delete(fileResult.Id);
@@ -72,6 +73,7 @@ namespace YellowDrawer.Storage.GridFS
         public bool IsFolderExits(string path)
         {
             var files = _bucket.Find(Builders<GridFSFileInfo>.Filter.Empty).ToList();
+            path = path.TrimEnd('\\') + '\\';
             var fileResult = files.FirstOrDefault(x => x.Filename == path);
             return fileResult != null;
         }
