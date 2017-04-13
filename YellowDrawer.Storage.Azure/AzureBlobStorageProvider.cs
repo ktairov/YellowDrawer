@@ -14,7 +14,7 @@ namespace YellowDrawer.Storage.Azure
 {
     public class AzureBlobStorageProvider : IStorageProvider
     {
-        private Object _lock = new Object();
+        private object _lock = new object();
         public CloudBlobClient BlobClient { get; private set; }
         public IList<CloudBlobContainer> Containers { get; private set; }
         public Func<string, CloudBlobContainer> ContainerFactory;
@@ -30,32 +30,30 @@ namespace YellowDrawer.Storage.Azure
 
         private CloudBlobContainer EnsurePathIsRelativeAndEnsureContainer(ref string path)
         {
-            path = path.ToLower().TrimStart('/').TrimStart('\\');
-            var containerName = path.Split('/', '\\').First();
+            if (path == null)
+            {
+                throw new ArgumentNullException();
+            }
+            path = path.Replace('\\', '/').ToLower().TrimStart('/');
+            if (path.StartsWith("http://") || path.StartsWith("https://"))
+                throw new ArgumentException("Path must be relative");
 
+            var containerName = path.Split('/').First();
             CloudBlobContainer container;
             lock (_lock)
             {
                 container = Containers.SingleOrDefault(c => c.Name == containerName);
-
                 if (container == null)
                 {
                     container = BlobClient.GetContainerReference(containerName);
-
                     if (!container.Exists())
                     {
                         container = ContainerFactory(containerName);
                     }
-
                     Containers.Add(container);
                 }
             }
-
-            if (path.StartsWith("/") || path.StartsWith("http://") || path.StartsWith("https://"))
-                throw new ArgumentException("Path must be relative");
-
-            path = string.Join("/", path.Split('/', '\\').Skip(1).ToArray());
-
+            path = string.Join("/", path.Split('/').Skip(1).ToArray());
             return container;
         }
 
@@ -65,35 +63,11 @@ namespace YellowDrawer.Storage.Azure
             {
                 throw new ArgumentNullException("path1");
             }
-
             if (path2 == null)
             {
                 throw new ArgumentNullException("path2");
             }
-
-            if (String.IsNullOrEmpty(path2))
-            {
-                return path1;
-            }
-
-            if (String.IsNullOrEmpty(path1))
-            {
-                return path2;
-            }
-
-            if (path2.StartsWith("http://") || path2.StartsWith("https://"))
-            {
-                return path2;
-            }
-
-            var ch = path1[path1.Length - 1];
-
-            if (ch != '/')
-            {
-                return (path1.TrimEnd('/') + '/' + path2.TrimStart('/'));
-            }
-
-            return (path1 + path2);
+            return (path1.TrimEnd('/') + '/' + path2.TrimStart('/'));
         }
 
         public string GetPublicUrl(string path)
@@ -104,7 +78,6 @@ namespace YellowDrawer.Storage.Azure
         public IStorageFile GetFile(string path)
         {
             var container = EnsurePathIsRelativeAndEnsureContainer(ref path);
-
             container.EnsureBlobExists(path);
             return new AzureBlobFileStorage(container.GetBlockBlobReference(path), this);
         }
@@ -112,7 +85,6 @@ namespace YellowDrawer.Storage.Azure
         public bool FileExists(string path)
         {
             var container = EnsurePathIsRelativeAndEnsureContainer(ref path);
-
             return container.BlobExists(path);
         }
 
@@ -120,19 +92,13 @@ namespace YellowDrawer.Storage.Azure
 
         public IEnumerable<IStorageFile> ListFiles(string path)
         {
-            path = path ?? String.Empty;
-
+            path = path ?? string.Empty;
             var container = EnsurePathIsRelativeAndEnsureContainer(ref path);
-
             string prefix = Combine(container.Name, path);
-
-            if (!prefix.EndsWith("/"))
-                prefix += "/";
-
-
+            prefix = prefix.TrimEnd('/') + "/";
             var result = BlobClient.ListBlobsWithPrefix(prefix)
                 .OfType<CloudBlockBlob>()
-                .Where(b => !b.Name.EndsWith("/")) //filter out virtual folder files
+                .Where(b => !b.Name.EndsWith("/"))
                 .Select(blobItem => new AzureBlobFileStorage(blobItem, this))
                 .ToArray();
 
@@ -141,12 +107,9 @@ namespace YellowDrawer.Storage.Azure
 
         public IEnumerable<IStorageFolder> ListFolders(string path)
         {
-            path = path ?? String.Empty;
-
+            path = path ?? string.Empty;
             var container = EnsurePathIsRelativeAndEnsureContainer(ref path);
-
-            // return root folders
-            if (path == String.Empty)
+            if (path == string.Empty)
             {
                 return container.ListBlobs()
                     .OfType<CloudBlobDirectory>()
@@ -161,34 +124,11 @@ namespace YellowDrawer.Storage.Azure
                 .ToList();
         }
 
-        public bool TryCreateFolder(string path)
-        {
-            try
-            {
-                var container = EnsurePathIsRelativeAndEnsureContainer(ref path);
-
-                if (!container.DirectoryExists(path))
-                {
-                    CreateFolder(path);
-                    return true;
-                }
-
-                // return false to be consistent with FileSystemProvider's implementation
-                return false;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
         public void CreateFolder(string path)
         {
             string fullPath = path;
             var container = EnsurePathIsRelativeAndEnsureContainer(ref path);
-
             container.EnsureDirectoryDoesNotExist(path);
-
             CreateFile(fullPath.Trim('/') + "/");
         }
 
@@ -196,14 +136,12 @@ namespace YellowDrawer.Storage.Azure
         {
             var fullPath = path;
             var container = EnsurePathIsRelativeAndEnsureContainer(ref path);
-
             if (path == "")
             {
                 Containers.Remove(container);
                 container.Delete();
                 return;
             }
-
             container.EnsureDirectoryExists(path);
             foreach (var blob in container.GetDirectoryReference(path).ListBlobs())
             {
@@ -215,8 +153,6 @@ namespace YellowDrawer.Storage.Azure
             }
         }
 
-      
-
         public void RenameFolder(string path, string newPath)
         {
             var fullNewPath = newPath;
@@ -225,14 +161,10 @@ namespace YellowDrawer.Storage.Azure
             var container = EnsurePathIsRelativeAndEnsureContainer(ref newPath);
 
             if (path == "")
-                throw new ArgumentException(
-                    "Renaming root folders represented by azure containers is not currently supported", path);
+                throw new ArgumentException("Renaming root folders represented by azure containers is not currently supported", path);
 
-            if (!path.EndsWith("/"))
-                path += "/";
-
-            if (!fullNewPath.EndsWith("/"))
-                fullNewPath += "/";
+            path = path.TrimEnd('/') + '/';
+            fullNewPath = fullNewPath.TrimEnd('/') + '/';
 
             foreach (var blob in container.GetDirectoryReference(path).ListBlobs())
             {
@@ -241,7 +173,6 @@ namespace YellowDrawer.Storage.Azure
                     var azureBlob = new AzureBlobFileStorage((CloudBlockBlob)blob, this);
                     RenameFile(azureBlob.GetPath(), Combine(fullNewPath, azureBlob.GetName()));
                 }
-
                 if (blob is CloudBlobDirectory)
                 {
                     var azureFolder = new AzureBlobFolderStorage((CloudBlobDirectory)blob, this);
@@ -253,7 +184,6 @@ namespace YellowDrawer.Storage.Azure
         public void DeleteFile(string path)
         {
             var container = EnsurePathIsRelativeAndEnsureContainer(ref path);
-
             container.EnsureBlobExists(path);
             var blob = container.GetBlockBlobReference(path);
             blob.Delete();
@@ -269,7 +199,6 @@ namespace YellowDrawer.Storage.Azure
 
             var blob = container.GetBlockBlobReference(path);
             var newBlob = container.GetBlockBlobReference(newPath);
-            //newBlob.StartCopyFromBlob(blob);
             newBlob.CopyFromBlob(blob);
             blob.Delete();
         }
@@ -280,18 +209,12 @@ namespace YellowDrawer.Storage.Azure
                 arr = new byte[0];
 
             var container = EnsurePathIsRelativeAndEnsureContainer(ref path);
-
             if (container.BlobExists(path))
             {
                 throw new ArgumentException("File " + path + " already exists");
             }
 
             var blob = container.GetBlockBlobReference(path);
-            var contentType = GetContentType(path);
-            if (!string.IsNullOrEmpty(contentType))
-            {
-                blob.Properties.ContentType = contentType;
-            }
 
             blob.UploadByteArray(arr);
             return new AzureBlobFileStorage(blob, this);
@@ -325,10 +248,7 @@ namespace YellowDrawer.Storage.Azure
 
         public void SaveStream(string path, Stream inputStream)
         {
-            // Create the file.
-            // The CreateFile method will map the still relative path
             var file = CreateFile(path);
-
             using (var outputStream = file.OpenWrite())
             {
                 var buffer = new byte[8192];
@@ -340,64 +260,6 @@ namespace YellowDrawer.Storage.Azure
                     outputStream.Write(buffer, 0, length);
                 }
             }
-        }
-
-        /// <summary>
-        /// Returns the mime-type of the specified file path, looking into IIS configuration and the Registry
-        /// </summary>
-        private string GetContentType(string path)
-        {
-            string extension = Path.GetExtension(path);
-            if (string.IsNullOrEmpty(extension))
-            {
-                return "application/unknown";
-            }
-
-            try
-            {
-                string applicationHost =
-                    System.Environment.ExpandEnvironmentVariables(
-                        @"%windir%\system32\inetsrv\config\applicationHost.config");
-                //string webConfig = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("/").FilePath;
-
-                // search for custom mime types in web.config and applicationhost.config
-                foreach (var configFile in new[] {/*webConfig,*/ applicationHost })
-                {
-                    if (File.Exists(configFile))
-                    {
-                        var xdoc = XDocument.Load(configFile);
-                        var mimeMap =
-                            xdoc.XPathSelectElements("//staticContent/mimeMap[@fileExtension='" + extension + "']")
-                                .FirstOrDefault();
-                        if (mimeMap != null)
-                        {
-                            var mimeType = mimeMap.Attribute("mimeType");
-                            if (mimeType != null)
-                            {
-                                return mimeType.Value;
-                            }
-                        }
-                    }
-                }
-
-                // search into the registry
-                RegistryKey regKey = Registry.ClassesRoot.OpenSubKey(extension.ToLower());
-                if (regKey != null)
-                {
-                    var contentType = regKey.GetValue("Content Type");
-                    if (contentType != null)
-                    {
-                        return contentType.ToString();
-                    }
-                }
-            }
-            catch
-            {
-                // if an exception occured return application/unknown
-                return "application/unknown";
-            }
-
-            return "application/unknown";
         }
 
         private CloudBlobContainer CreateContainer(string name)

@@ -105,13 +105,5 @@ namespace YellowDrawer.Storage.GridFS
             if (fileResult != null)
                 _bucket.Rename(fileResult.Id, newPath);
         }
-
-        public bool TryCreateFolder(string path)
-        {
-            var arr = new byte[0];
-            path = path.TrimEnd('\\') + '\\';
-            var id = _bucket.UploadFromBytes(path, arr);
-            return true;
-        }
     }
 }

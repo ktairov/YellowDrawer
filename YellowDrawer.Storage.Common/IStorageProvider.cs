@@ -16,6 +16,5 @@ namespace YellowDrawer.Storage.Common
         IStorageFile CreateFile(string path, byte[] arr = null);
         bool IsFileExists(string path);
         bool IsFolderExits(string path);
-        bool TryCreateFolder(string path);
     }
 }

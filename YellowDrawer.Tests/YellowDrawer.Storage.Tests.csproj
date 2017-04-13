@@ -124,7 +124,6 @@
     <Compile Include="Tests\AzureTests.cs" />
     <Compile Include="Tests\CommonTests.cs" />
     <Compile Include="Tests\GridFSTests.cs" />
-    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

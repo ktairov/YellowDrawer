@@ -89,20 +89,6 @@ namespace YellowDrawer.Storage.AmazonS3
             di.Create();
         }
 
-
-
-        public bool TryCreateFolder(string path)
-        {
-            if (IsFolderExits(path))
-            {
-                return false;
-            }
-
-            var di = new S3DirectoryInfo(_amazonS3, _bucketName, path);
-            di.Create();
-            return true;
-        }
-
         public void DeleteFolder(string path)
         {
             if (!IsFolderExits(path))
@@ -141,7 +127,10 @@ namespace YellowDrawer.Storage.AmazonS3
             var fileInfo = new S3FileInfo(_amazonS3, _bucketName, path);
             using (var stream = fileInfo.Create())
             {
-                stream.Write(new byte[0], 0, 0);
+                if (arr == null)
+                    stream.Write(new byte[0], 0, 0);
+                else
+                    stream.Write(arr, 0, arr.Length);
             }
 
             return new AmazonStorageFile(fileInfo);

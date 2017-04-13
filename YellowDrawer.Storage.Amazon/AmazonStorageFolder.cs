@@ -45,8 +45,7 @@ namespace YellowDrawer.Storage.AmazonS3
             {
                 return new AmazonStorageFolder(Path.GetDirectoryName(_path), _directoryInfo.Parent);
             }
-            throw new InvalidOperationException("Directory " + _directoryInfo.Name +
-                                                " does not have a parent directory");
+            throw new InvalidOperationException("Directory " + _directoryInfo.Name + " does not have a parent directory");
         }
 
         #endregion

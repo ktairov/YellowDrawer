@@ -1,5 +1,5 @@
-.NET SDK for YellowDrawer.
-==========================
+.NET SDK for YellowDrawer.Storage.
+==================================
 
 .NET library to access GridFS, Azure or Amazon file storage. Thank you for
 choosing YellowDrawer.
@@ -9,12 +9,12 @@ choosing YellowDrawer.
 DIRECTORY STRUCTURE -------------------
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-YellowDrawer.Common                core wrapper code
-YellowDrawer.GridFS
-YellowDrawer.Azure
-YellowDrawer.Amazon
-YellowDrawer.Tests       tests of the core wrapper code
-YellowDrawer.Simple      example project
+YellowDrawer.Storage.Common                core wrapper code
+YellowDrawer.Storage.GridFS
+YellowDrawer.Storage.Azure
+YellowDrawer.Storage.Amazon
+YellowDrawer.Storage.Tests       tests of the core wrapper code
+YellowDrawer.Storage.Simple      example project
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 REQUIREMENTS
