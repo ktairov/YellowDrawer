@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YellowDrawer.Storage.Simple", "YellowDrawer.Simple\YellowDrawer.Storage.Simple.csproj", "{4E290336-4B1A-40D2-8965-D5E9EC2952F8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YellowDrawer.Storage.Simple", "examples\YellowDrawer.Simple\YellowDrawer.Storage.Simple.csproj", "{4E290336-4B1A-40D2-8965-D5E9EC2952F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YellowDrawer.Storage.Tests", "YellowDrawer.Tests\YellowDrawer.Storage.Tests.csproj", "{795A35A3-0D25-4E18-968E-181B10CEBFF8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YellowDrawer.Storage.Tests", "test\YellowDrawer.Tests\YellowDrawer.Storage.Tests.csproj", "{795A35A3-0D25-4E18-968E-181B10CEBFF8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "YellowDrawer.Storage.Amazon", "YellowDrawer.Storage.Amazon", "{E33F24A5-5EB0-4F01-89DA-66C74654C4B6}"
 EndProject
@@ -15,25 +15,25 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "YellowDrawer.Storage.GridFS
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "YellowDrawer.Storage.Common", "YellowDrawer.Storage.Common", "{5F668B16-34EF-4AD9-925E-9402EC611BDF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YellowDrawer.Storage.GridFS", "YellowDrawer.Storage.GridFS\YellowDrawer.Storage.GridFS.csproj", "{62FB2D09-8D85-4ACE-A945-A19C8B7B2D9C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YellowDrawer.Storage.GridFS", "src\YellowDrawer.Storage.GridFS\YellowDrawer.Storage.GridFS.csproj", "{62FB2D09-8D85-4ACE-A945-A19C8B7B2D9C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YellowDrawer.Storage.Common", "YellowDrawer.Storage.Common\YellowDrawer.Storage.Common.csproj", "{5B9E350E-BA7E-40AD-9F8E-0FF64A77C5B2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YellowDrawer.Storage.Common", "src\YellowDrawer.Storage.Common\YellowDrawer.Storage.Common.csproj", "{5B9E350E-BA7E-40AD-9F8E-0FF64A77C5B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YellowDrawer.Storage.Common.Net4", "YellowDrawer.Storage.Common\YellowDrawer.Storage.Common.Net4.csproj", "{158A670C-A166-4555-8C17-7D979FF3F768}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YellowDrawer.Storage.Common.Net4", "src\YellowDrawer.Storage.Common\YellowDrawer.Storage.Common.Net4.csproj", "{158A670C-A166-4555-8C17-7D979FF3F768}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YellowDrawer.Storage.Common.Net35", "YellowDrawer.Storage.Common\YellowDrawer.Storage.Common.Net35.csproj", "{8BE90A56-5605-4EE4-8855-F3EBE0267B6D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YellowDrawer.Storage.Common.Net35", "src\YellowDrawer.Storage.Common\YellowDrawer.Storage.Common.Net35.csproj", "{8BE90A56-5605-4EE4-8855-F3EBE0267B6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YellowDrawer.Storage.Azure", "YellowDrawer.Storage.Azure\YellowDrawer.Storage.Azure.csproj", "{2D657EE0-DDD0-4AF4-90BB-3DDAEE0F736F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YellowDrawer.Storage.Azure", "src\YellowDrawer.Storage.Azure\YellowDrawer.Storage.Azure.csproj", "{2D657EE0-DDD0-4AF4-90BB-3DDAEE0F736F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YellowDrawer.Storage.Amazon.Net4", "YellowDrawer.Storage.Amazon\YellowDrawer.Storage.Amazon.Net4.csproj", "{855B2C84-A162-4120-ACD6-D9E72768C6C0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YellowDrawer.Storage.Amazon.Net4", "src\YellowDrawer.Storage.Amazon\YellowDrawer.Storage.Amazon.Net4.csproj", "{855B2C84-A162-4120-ACD6-D9E72768C6C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YellowDrawer.Storage.Azure.Net4", "YellowDrawer.Storage.Azure\YellowDrawer.Storage.Azure.Net4.csproj", "{08F624EF-B1AC-43BA-BCC7-74DCC49557F0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YellowDrawer.Storage.Azure.Net4", "src\YellowDrawer.Storage.Azure\YellowDrawer.Storage.Azure.Net4.csproj", "{08F624EF-B1AC-43BA-BCC7-74DCC49557F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YellowDrawer.Storage.Azure.Net35", "YellowDrawer.Storage.Azure\YellowDrawer.Storage.Azure.Net35.csproj", "{19D29711-EBAB-4D19-B8C9-AB6A76590A24}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YellowDrawer.Storage.Azure.Net35", "src\YellowDrawer.Storage.Azure\YellowDrawer.Storage.Azure.Net35.csproj", "{19D29711-EBAB-4D19-B8C9-AB6A76590A24}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YellowDrawer.Storage.Amazon", "YellowDrawer.Storage.Amazon\YellowDrawer.Storage.Amazon.csproj", "{00833F7E-653C-4077-ABC8-7DA6334FC62A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YellowDrawer.Storage.Amazon", "src\YellowDrawer.Storage.Amazon\YellowDrawer.Storage.Amazon.csproj", "{00833F7E-653C-4077-ABC8-7DA6334FC62A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YellowDrawer.Storage.Amazon.Net35", "YellowDrawer.Storage.Amazon\YellowDrawer.Storage.Amazon.Net35.csproj", "{BFFA7B3C-8C24-42FB-9053-163DACAF8175}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YellowDrawer.Storage.Amazon.Net35", "src\YellowDrawer.Storage.Amazon\YellowDrawer.Storage.Amazon.Net35.csproj", "{BFFA7B3C-8C24-42FB-9053-163DACAF8175}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

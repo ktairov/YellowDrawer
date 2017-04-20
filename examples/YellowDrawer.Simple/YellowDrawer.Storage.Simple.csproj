@@ -119,19 +119,19 @@
     <Analyzer Include="..\packages\AWSSDK.S3.3.3.3\analyzers\dotnet\cs\AWSSDK.S3.CodeAnalysis.dll" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\YellowDrawer.Storage.Amazon\YellowDrawer.Storage.Amazon.csproj">
+    <ProjectReference Include="..\..\src\YellowDrawer.Storage.Amazon\YellowDrawer.Storage.Amazon.csproj">
       <Project>{00833f7e-653c-4077-abc8-7da6334fc62a}</Project>
       <Name>YellowDrawer.Storage.Amazon</Name>
     </ProjectReference>
-    <ProjectReference Include="..\YellowDrawer.Storage.Azure\YellowDrawer.Storage.Azure.csproj">
+    <ProjectReference Include="..\..\src\YellowDrawer.Storage.Azure\YellowDrawer.Storage.Azure.csproj">
       <Project>{2d657ee0-ddd0-4af4-90bb-3ddaee0f736f}</Project>
       <Name>YellowDrawer.Storage.Azure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\YellowDrawer.Storage.Common\YellowDrawer.Storage.Common.csproj">
+    <ProjectReference Include="..\..\src\YellowDrawer.Storage.Common\YellowDrawer.Storage.Common.csproj">
       <Project>{5b9e350e-ba7e-40ad-9f8e-0ff64a77c5b2}</Project>
       <Name>YellowDrawer.Storage.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\YellowDrawer.Storage.GridFS\YellowDrawer.Storage.GridFS.csproj">
+    <ProjectReference Include="..\..\src\YellowDrawer.Storage.GridFS\YellowDrawer.Storage.GridFS.csproj">
       <Project>{62fb2d09-8d85-4ace-a945-a19c8b7b2d9c}</Project>
       <Name>YellowDrawer.Storage.GridFS</Name>
     </ProjectReference>

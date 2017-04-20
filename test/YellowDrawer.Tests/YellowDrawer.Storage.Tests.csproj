@@ -130,7 +130,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\YellowDrawer.Storage.Amazon\YellowDrawer.Storage.Amazon.csproj">
+    <ProjectReference Include="..\..\src\YellowDrawer.Storage.Amazon\YellowDrawer.Storage.Amazon.csproj">
       <Project>{00833f7e-653c-4077-abc8-7da6334fc62a}</Project>
       <Name>YellowDrawer.Storage.Amazon</Name>
     </ProjectReference>
