@@ -10,9 +10,6 @@
     <description>NET library to access file storages</description>
     <copyright>Copyright 2017</copyright>
 	<dependencies>
-            <group targetFramework=".NETFramework4.5" />
-            <group targetFramework=".NETFramework4.0" />
-            <group targetFramework=".NETFramework3.5" />
 	</dependencies>
   </metadata>
 	<files>
