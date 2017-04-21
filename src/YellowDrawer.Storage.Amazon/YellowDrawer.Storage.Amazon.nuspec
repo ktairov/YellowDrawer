@@ -10,6 +10,8 @@
     <description>NET library to access Amazon file storage</description>
     <copyright>Copyright 2017</copyright>
 	<dependencies>
+	    <dependency id="YellowDrawer.Storage.Common" />
+		<dependency id="AWSSDK.S3" />
 	</dependencies>
   </metadata>
 	<files>
