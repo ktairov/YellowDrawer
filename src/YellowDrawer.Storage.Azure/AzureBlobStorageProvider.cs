@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Xml.Linq;
-using System.Xml.XPath;
-using Microsoft.Win32;
 using YellowDrawer.Storage.Common;
 using Microsoft.WindowsAzure.StorageClient;
 using Microsoft.WindowsAzure;
@@ -23,7 +20,7 @@ namespace YellowDrawer.Storage.Azure
         public AzureBlobStorageProvider(CloudStorageAccount storageAccount)
         {
             _storageAccount = storageAccount;
-            BlobClient = _storageAccount.CreateCloudBlobClient();            
+            BlobClient = _storageAccount.CreateCloudBlobClient();
             Containers = new List<CloudBlobContainer>();
             ContainerFactory = CreateContainer;
         }
@@ -213,9 +210,7 @@ namespace YellowDrawer.Storage.Azure
             {
                 throw new ArgumentException("File " + path + " already exists");
             }
-
             var blob = container.GetBlockBlobReference(path);
-
             blob.UploadByteArray(arr);
             return new AzureBlobFileStorage(blob, this);
         }

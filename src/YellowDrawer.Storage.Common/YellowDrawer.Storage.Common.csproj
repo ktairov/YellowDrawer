@@ -38,6 +38,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Encryption\AES256StorageEncryptionProvider.cs" />
+    <Compile Include="Encryption\IStorageEncryptionProvider.cs" />
+    <Compile Include="Encryption\DesStorageEncryptionProvider.cs" />
+    <Compile Include="Encryption\Rc2StorageEncryptionProvider.cs" />
+    <Compile Include="Encryption\StorageEncryptionProvider.cs" />
     <Compile Include="FileSystem\FileSystemStorageFile.cs" />
     <Compile Include="FileSystem\FileSystemStorageFolder.cs" />
     <Compile Include="FileSystem\FileSystemStorageProvider.cs" />

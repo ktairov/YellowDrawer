@@ -13,7 +13,7 @@ namespace YellowDrawer.Storage.Simple
 {
     class Program
     {
-        public static string connectionStringAzure = "DefaultEndpointsProtocol=https;AccountName={AccountName};AccountKey={AccountKey}";
+        public static string connectionStringAzure = "DefaultEndpointsProtocol=https;AccountName=pip01dev;AccountKey=6apQcJ4AYG0s79B8idqBihKQz7Xm5yXDrFJCmxEQBgMTlaW3v+3D5oW0k1Y9hE051O3n3cnq+R7UmMdcLHTH7w==";
 
         public static string awsAccessKey = "";
         public static string awsSecretKey = "";
@@ -26,21 +26,29 @@ namespace YellowDrawer.Storage.Simple
 
         static void Main(string[] args)
         {
+            var encryptionProvider = new AesStorageEncryptionProvider("cuwRX6tRedZGFlAG2vOBytIS4iaWOv8D");
+
             var cloudStorageAccount = CloudStorageAccount.Parse(connectionStringAzure);
             var azureProvider = new AzureBlobStorageProvider(cloudStorageAccount);
 
-            var fileSystemProvider = new FileSystemStorageProvider("C://");
-            var amazonClient = new AmazonS3Client(awsAccessKey, awsSecretKey, Amazon.RegionEndpoint.USEast1);
-            var amazonProvider = new AmazonStorageProvider(amazonClient, amazonBaseUrl, awsBucketName);
+            //var fileSystemProvider = new FileSystemStorageProvider("C://");
+            //var amazonClient = new AmazonS3Client(awsAccessKey, awsSecretKey, Amazon.RegionEndpoint.USEast1);
+            //var amazonProvider = new AmazonStorageProvider(amazonClient, amazonBaseUrl, awsBucketName);
 
-            var client = new MongoClient(mongoConnectionString);
-            var server = client.GetDatabase(mongoDataBase);
-            IGridFSBucket _bucket = new GridFSBucket(server);
-            var mongoProvider = new GridFSStorageProvider(_bucket);
+            //var client = new MongoClient(mongoConnectionString);
+            //var server = client.GetDatabase(mongoDataBase);
+            //IGridFSBucket _bucket = new GridFSBucket(server);
+            //var mongoProvider = new GridFSStorageProvider(_bucket);
 
-            TestProvider(azureProvider, "Azure");
-            TestProvider(amazonProvider, "Amazon");
-            TestProvider(mongoProvider, "Mongo");
+            var iv = encryptionProvider.GenerateIV();
+            TestWriteEncryptionProvider(azureProvider, encryptionProvider, iv);
+            TestReadEncryptionProvider(azureProvider, encryptionProvider, iv);
+
+            //TestProvider(azureProvider, "Azure");
+            //TestProvider(amazonProvider, "Amazon");
+            //TestProvider(mongoProvider, "Mongo");
+
+
             Console.ReadLine();
         }
 
@@ -68,6 +76,55 @@ namespace YellowDrawer.Storage.Simple
                 Console.WriteLine("File not exist");
             provider.DeleteFile(path);
             Console.WriteLine("Delete file");
+        }
+
+        static void TestWriteEncryptionProvider(IStorageProvider provider, IStorageEncryptionProvider encryptionProvider, byte[] iv)
+        {
+            byte[] buff = new byte[0];
+            var fileName = pathToTestFile;
+            FileStream fs = new FileStream(fileName,
+                                           FileMode.Open,
+                                           FileAccess.Read);
+
+            var path = "testfolder\\testencryption990.jpeg";
+            provider.DeleteFile(path);
+            var file = provider.CreateFile(path);
+            var streamWrite = file.OpenCryptoWrite(encryptionProvider, iv);
+            CopyStream(fs, streamWrite);
+        }
+
+        static void TestReadEncryptionProvider(IStorageProvider provider, IStorageEncryptionProvider encryptionProvider, byte[] iv)
+        {
+            var path = "testfolder\\testencryption990.jpeg";
+            var file = provider.GetFile(path);
+            var streamRead = file.OpenCryptoRead(encryptionProvider, iv);
+            
+            FileStream fs = new FileStream(@"..\..\TestDecryptFile990.jpeg",
+                                           FileMode.OpenOrCreate,
+                                           FileAccess.Write);
+
+            CopyStream(streamRead, fs);
+        }
+
+        private static void CopyStream(Stream input, Stream output)
+        {
+            using (output)
+            {
+                using (input)
+                {
+                    byte[] numArray = new byte[9192];
+                    while (true)
+                    {
+                        int num = input.Read(numArray, 0, numArray.Length);
+                        int num1 = num;
+                        if (num <= 0)
+                        {
+                            break;
+                        }
+                        output.Write(numArray, 0, num1);
+                    }
+                }
+            }
         }
     }
 }

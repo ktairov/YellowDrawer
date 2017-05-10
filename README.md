@@ -1,11 +1,13 @@
-# .NET SDK for YellowDrawer.Storage.
+# YellowDrawer.Storage.
 
 
 [![Build status](https://ci.appveyor.com/api/projects/status/t76g9ja3s5a3ex1q?svg=true)](https://ci.appveyor.com/project/AlexeyKharchenko/yellowdrawer) [![NuGet](https://img.shields.io/nuget/v/YellowDrawer.Storage.Common.svg)](https://www.nuget.org/packages/YellowDrawer.Storage.Common/) 
 
 ## What is YellowDrawer.Storage?
 
-.NET library to access GridFS, Azure or Amazon file storage.
+.Net library which implements providers for working with GridFS, Azure and Amazon Cloud Storages. Providers implement a general interface and have the same set of methods for working with Cloud Storages. Thus, we do the work with the Cloud Storage much easier avoiding confusion.
+In addition, using this providers it is easy to change the usage of one Cloud Storage for another without global project modifications.
+Also, in the YellowDrawer.Storage.Common library the provider for FileSystem data access is implemented.
 
 ## Install
 

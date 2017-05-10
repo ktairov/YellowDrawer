@@ -63,6 +63,16 @@ namespace YellowDrawer.Storage.Azure
             return _blob.OpenWrite();
         }
 
+        public Stream OpenCryptoRead(IStorageEncryptionProvider encryptionProvider, byte[] iv)
+        {
+            return encryptionProvider.Decrypt(_blob.OpenRead(), iv);
+        }
+
+        public Stream OpenCryptoWrite(IStorageEncryptionProvider encryptionProvider, byte[] iv)
+        {
+            return encryptionProvider.Encrypt(_blob.OpenWrite(), iv);
+        }
+
         public Stream CreateFile()
         {
             _blob.DeleteIfExists();

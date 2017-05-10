@@ -54,6 +54,16 @@ namespace YellowDrawer.Storage.AmazonS3
         {
             return _fileInfo.OpenWrite();
         }
+
+        public Stream OpenCryptoRead(IStorageEncryptionProvider encryptionProvider, byte[] iv)
+        {
+            return encryptionProvider.Decrypt(_fileInfo.OpenRead(), iv);
+        }
+
+        public Stream OpenCryptoWrite(IStorageEncryptionProvider encryptionProvider, byte[] iv)
+        {
+            return encryptionProvider.Encrypt(_fileInfo.OpenWrite(), iv);
+        }
         #endregion
     }
 }

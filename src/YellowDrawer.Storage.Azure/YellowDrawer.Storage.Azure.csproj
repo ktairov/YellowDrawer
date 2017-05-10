@@ -75,9 +75,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\YellowDrawer.Storage.Common\YellowDrawer.Storage.Common.Net35.csproj">
-      <Project>{8be90a56-5605-4ee4-8855-f3ebe0267b6d}</Project>
-      <Name>YellowDrawer.Storage.Common.Net35</Name>
+    <ProjectReference Include="..\YellowDrawer.Storage.Common\YellowDrawer.Storage.Common.csproj">
+      <Project>{5B9E350E-BA7E-40AD-9F8E-0FF64A77C5B2}</Project>
+      <Name>YellowDrawer.Storage.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

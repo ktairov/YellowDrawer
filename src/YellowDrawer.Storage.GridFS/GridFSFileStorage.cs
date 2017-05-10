@@ -3,6 +3,7 @@ using System.IO;
 using YellowDrawer.Storage.Common;
 using System.Linq;
 using MongoDB.Driver.GridFS;
+using System.Threading.Tasks;
 
 namespace YellowDrawer.Storage.GridFS
 {
@@ -55,6 +56,26 @@ namespace YellowDrawer.Storage.GridFS
         public Stream OpenWrite()
         {
             return _bucket.OpenUploadStream(_fileInfo.Filename);
+        }
+
+        public async Task<Stream> OpenReadAsync()
+        {
+            return await _bucket.OpenDownloadStreamAsync(_fileInfo.Id);
+        }
+
+        public async Task<Stream> OpenWriteAsync()
+        {
+            return await _bucket.OpenUploadStreamAsync(_fileInfo.Filename);
+        }
+
+        public Stream OpenCryptoRead(IStorageEncryptionProvider encryptionProvider, byte[] iv)
+        {
+            return encryptionProvider.Decrypt(_bucket.OpenDownloadStream(_fileInfo.Id), iv);
+        }
+
+        public Stream OpenCryptoWrite(IStorageEncryptionProvider encryptionProvider, byte[] iv)
+        {
+            return encryptionProvider.Encrypt(_bucket.OpenUploadStream(_fileInfo.Filename), iv);
         }
     }
 }

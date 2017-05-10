@@ -54,6 +54,16 @@ namespace YellowDrawer.Storage.Common
         {
             return new FileStream(_fileInfo.FullName, FileMode.Open, FileAccess.ReadWrite);
         }
+
+        public Stream OpenCryptoRead(IStorageEncryptionProvider encryptionProvider, byte[] iv)
+        {
+            return encryptionProvider.Decrypt(new FileStream(_fileInfo.FullName, FileMode.Open, FileAccess.Read), iv);
+        }
+
+        public Stream OpenCryptoWrite(IStorageEncryptionProvider encryptionProvider, byte[] iv)
+        {
+            return encryptionProvider.Encrypt(new FileStream(_fileInfo.FullName, FileMode.Open, FileAccess.ReadWrite), iv);
+        }
         #endregion
     }
 }
