@@ -13,7 +13,7 @@ namespace YellowDrawer.Storage.Simple
 {
     class Program
     {
-        public static string connectionStringAzure = "DefaultEndpointsProtocol=https;AccountName=pip01dev;AccountKey=6apQcJ4AYG0s79B8idqBihKQz7Xm5yXDrFJCmxEQBgMTlaW3v+3D5oW0k1Y9hE051O3n3cnq+R7UmMdcLHTH7w==";
+        public static string connectionStringAzure = "DefaultEndpointsProtocol=https;AccountName={0};AccountKey={1}";
 
         public static string awsAccessKey = "";
         public static string awsSecretKey = "";
@@ -31,22 +31,22 @@ namespace YellowDrawer.Storage.Simple
             var cloudStorageAccount = CloudStorageAccount.Parse(connectionStringAzure);
             var azureProvider = new AzureBlobStorageProvider(cloudStorageAccount);
 
-            //var fileSystemProvider = new FileSystemStorageProvider("C://");
-            //var amazonClient = new AmazonS3Client(awsAccessKey, awsSecretKey, Amazon.RegionEndpoint.USEast1);
-            //var amazonProvider = new AmazonStorageProvider(amazonClient, amazonBaseUrl, awsBucketName);
+            var fileSystemProvider = new FileSystemStorageProvider("C://");
+            var amazonClient = new AmazonS3Client(awsAccessKey, awsSecretKey, Amazon.RegionEndpoint.USEast1);
+            var amazonProvider = new AmazonStorageProvider(amazonClient, amazonBaseUrl, awsBucketName);
 
-            //var client = new MongoClient(mongoConnectionString);
-            //var server = client.GetDatabase(mongoDataBase);
-            //IGridFSBucket _bucket = new GridFSBucket(server);
-            //var mongoProvider = new GridFSStorageProvider(_bucket);
+            var client = new MongoClient(mongoConnectionString);
+            var server = client.GetDatabase(mongoDataBase);
+            IGridFSBucket _bucket = new GridFSBucket(server);
+            var mongoProvider = new GridFSStorageProvider(_bucket);
 
             var iv = encryptionProvider.GenerateIV();
             TestWriteEncryptionProvider(azureProvider, encryptionProvider, iv);
             TestReadEncryptionProvider(azureProvider, encryptionProvider, iv);
 
-            //TestProvider(azureProvider, "Azure");
-            //TestProvider(amazonProvider, "Amazon");
-            //TestProvider(mongoProvider, "Mongo");
+            TestProvider(azureProvider, "Azure");
+            TestProvider(amazonProvider, "Amazon");
+            TestProvider(mongoProvider, "Mongo");
 
 
             Console.ReadLine();
