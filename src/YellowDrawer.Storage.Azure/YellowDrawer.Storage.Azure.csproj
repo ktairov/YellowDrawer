@@ -64,7 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AzureBlobFileStorage .cs" />
+    <Compile Include="AzureBlobFileStorage.cs" />
     <Compile Include="AzureBlobFolderStorage.cs" />
     <Compile Include="AzureBlobStorageProvider.cs" />
     <Compile Include="CloudBlobContainerExtensions.cs" />
