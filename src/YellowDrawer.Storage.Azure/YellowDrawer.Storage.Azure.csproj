@@ -65,7 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AzureBlobFileStorage .cs" />
-    <Compile Include="AzureBlobFolderStorage .cs" />
+    <Compile Include="AzureBlobFolderStorage.cs" />
     <Compile Include="AzureBlobStorageProvider.cs" />
     <Compile Include="CloudBlobContainerExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
